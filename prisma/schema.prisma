@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Produto {
+  id                 String   @id @default(cuid())
+  nome               String
+  descricaoCurta     String
+  descricaoCompleta  String
+  preco              Float?
+  categoria          String
+  imagem             String?
+  ativo              Boolean  @default(true)
+  criadoEm           DateTime @default(now())
+  atualizadoEm       DateTime @updatedAt
+
+  @@index([ativo])
+  @@index([categoria])
+}
+
+model Banner {
+  id          String   @id @default(cuid())
+  titulo      String
+  subtitulo   String
+  imagem      String?
+  textoBotao  String
+  linkBotao   String
+  atualizadoEm DateTime @updatedAt
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senhaHash String
+  criadoEm  DateTime @default(now())
+}
