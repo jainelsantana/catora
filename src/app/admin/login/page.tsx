@@ -61,7 +61,7 @@ export default function LoginPage() {
             <h1 className="mt-4 text-3xl font-black text-ink dark:text-white">CatalogoOra Admin</h1>
           </div>
 
-          <form className="panel p-6" onSubmit={handleSubmit}>
+          <form className="panel p-6" onSubmit={handleSubmit} autoComplete="off">
             <div>
               <p className="text-sm font-black uppercase text-lagoon">Login administrativo</p>
               <h2 className="mt-2 text-2xl font-black text-ink dark:text-white">Acesse o painel</h2>
@@ -72,7 +72,17 @@ export default function LoginPage() {
                 <span className="form-label">Email</span>
                 <span className="relative block">
                   <Mail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                  <input className="form-input pl-11" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+                  <input
+                    className="form-input pl-11"
+                    type="email"
+                    name="catalogoora_login_email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="Digite seu email"
+                    autoComplete="off"
+                    spellCheck={false}
+                    required
+                  />
                 </span>
               </label>
 
@@ -83,9 +93,11 @@ export default function LoginPage() {
                   <input
                     className="form-input pl-11"
                     type="password"
+                    name="catalogoora_login_secret"
                     value={senha}
                     onChange={(event) => setSenha(event.target.value)}
                     placeholder="Digite sua senha"
+                    autoComplete="new-password"
                     required
                   />
                 </span>
