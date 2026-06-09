@@ -12,4 +12,4 @@ RUN npx prisma generate && npm run build
 
 EXPOSE 3007
 
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run db:seed && npm build && npm start"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run db:seed && npm start"]
