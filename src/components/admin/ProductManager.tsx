@@ -5,6 +5,7 @@ import { CheckCircle2, Edit3, ImagePlus, Loader2, PlusCircle, Save, Trash2, X } 
 import { apiFetch } from "@/services/api";
 import type { Produto } from "@/types/catalogo";
 import { formatCurrency } from "@/utils/format";
+import { getImageUrl } from "@/utils/image-url";
 
 type ProductFormState = {
   nome: string;
@@ -175,7 +176,7 @@ export function ProductManager() {
     }
   }
 
-  const preview = imagePreview || editing?.imagem || "";
+  const preview = imagePreview || getImageUrl(editing?.imagem) || "";
 
   return (
     <div className="space-y-6">
@@ -286,7 +287,7 @@ export function ProductManager() {
               {produtos.map((produto) => (
                 <article key={produto.id} className="grid gap-4 p-4 sm:grid-cols-[112px_1fr]">
                   <div className="h-28 overflow-hidden rounded-lg bg-slate-100">
-                    {produto.imagem ? <img src={produto.imagem} alt={produto.nome} className="h-full w-full object-cover" /> : null}
+                    {getImageUrl(produto.imagem) ? <img src={getImageUrl(produto.imagem)} alt={produto.nome} className="h-full w-full object-cover" /> : null}
                   </div>
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-start justify-between gap-3">

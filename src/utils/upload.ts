@@ -1,8 +1,12 @@
 import { randomUUID } from "crypto";
-import { mkdir, unlink, writeFile } from "fs/promises";
+import { access, mkdir, unlink, writeFile } from "fs/promises";
 import path from "path";
 
-const uploadDir = path.join(process.cwd(), "public", "uploads");
+const configuredUploadDir = process.env.UPLOAD_DIR ?? "storage/uploads";
+export const uploadDir = path.isAbsolute(configuredUploadDir)
+  ? configuredUploadDir
+  : path.join(process.cwd(), configuredUploadDir);
+export const legacyPublicUploadDir = path.join(process.cwd(), "public", "uploads");
 const maxSize = 5 * 1024 * 1024;
 const allowedTypes: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -34,18 +38,53 @@ export async function saveImageFromForm(formData: FormData, fieldName = "imagem"
   const bytes = Buffer.from(await file.arrayBuffer());
   await writeFile(path.join(uploadDir, filename), bytes);
 
-  return `/uploads/${filename}`;
+  return `/api/uploads/${filename}`;
 }
 
 export async function removeLocalUpload(image?: string | null) {
-  if (!image || !image.startsWith("/uploads/")) {
+  const filename = getUploadFilename(image);
+  if (!filename) {
     return;
   }
 
-  const filename = path.basename(image);
   try {
     await unlink(path.join(uploadDir, filename));
   } catch {
     // The database should remain authoritative even if an old file is already gone.
   }
+}
+
+export function getUploadFilename(image?: string | null) {
+  if (!image) {
+    return null;
+  }
+
+  if (image.startsWith("/api/uploads/")) {
+    return path.basename(image.replace("/api/uploads/", ""));
+  }
+
+  if (image.startsWith("/uploads/")) {
+    return path.basename(image.replace("/uploads/", ""));
+  }
+
+  return null;
+}
+
+export async function resolveUploadPath(filename: string) {
+  const safeFilename = path.basename(filename);
+  const candidates = [
+    path.join(uploadDir, safeFilename),
+    path.join(legacyPublicUploadDir, safeFilename)
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      await access(candidate);
+      return candidate;
+    } catch {
+      // Try the next known upload location.
+    }
+  }
+
+  return null;
 }

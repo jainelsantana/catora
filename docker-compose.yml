@@ -8,6 +8,7 @@ services:
     environment:
       PORT: "3007"
       DATABASE_URL: "file:/data/catalogoora.db"
+      UPLOAD_DIR: "/data/uploads"
       JWT_SECRET: "altere-este-segredo-no-compose"
       AUTH_SECURE_COOKIES: "false"
       ADMIN_NAME: "Administrador CatalogoOra"
@@ -16,8 +17,6 @@ services:
       NEXT_PUBLIC_WHATSAPP_NUMBER: "5511999999999"
     volumes:
       - catalogoora_data:/data
-      - catalogoora_uploads:/app/public/uploads
 
 volumes:
   catalogoora_data:
-  catalogoora_uploads:

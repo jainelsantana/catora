@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { ExternalLink, ImagePlus, Loader2, Save } from "lucide-react";
 import { apiFetch } from "@/services/api";
 import type { Banner } from "@/types/catalogo";
+import { getImageUrl } from "@/utils/image-url";
 
 type BannerFormState = {
   titulo: string;
@@ -96,7 +97,7 @@ export function BannerManager() {
     }
   }
 
-  const previewImage = imagePreview || banner?.imagem || "";
+  const previewImage = imagePreview || getImageUrl(banner?.imagem) || "";
 
   if (loading) {
     return <div className="panel px-5 py-4 text-sm font-semibold text-graphite">Carregando banner</div>;

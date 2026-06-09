@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MessageCircle, Tag } from "lucide-react";
 import type { Produto } from "@/types/catalogo";
 import { formatCurrency } from "@/utils/format";
+import { getImageUrl } from "@/utils/image-url";
 
 type ProductCardProps = {
   produto: Produto;
@@ -9,6 +10,7 @@ type ProductCardProps = {
 
 export function ProductCard({ produto }: ProductCardProps) {
   const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const imageUrl = getImageUrl(produto.imagem);
   const whatsapp = phone
     ? `https://wa.me/${phone}?text=${encodeURIComponent(`Ola! Tenho interesse no produto ${produto.nome}.`)}`
     : undefined;
@@ -16,8 +18,8 @@ export function ProductCard({ produto }: ProductCardProps) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
       <Link href={`/produtos/${produto.id}`} className="block aspect-[4/3] overflow-hidden bg-slate-100">
-        {produto.imagem ? (
-          <img src={produto.imagem} alt={produto.nome} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        {imageUrl ? (
+          <img src={imageUrl} alt={produto.nome} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         ) : (
           <div className="grid h-full place-items-center bg-gradient-to-br from-slate-100 to-emerald-50 text-sm font-semibold text-graphite">
             Sem imagem

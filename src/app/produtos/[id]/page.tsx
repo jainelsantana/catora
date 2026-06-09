@@ -4,6 +4,7 @@ import { ArrowLeft, MessageCircle, Tag } from "lucide-react";
 import { Header } from "@/components/Header";
 import { prisma } from "@/utils/prisma";
 import { formatCurrency } from "@/utils/format";
+import { getImageUrl } from "@/utils/image-url";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
   }
 
   const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const imageUrl = getImageUrl(produto.imagem);
   const whatsapp = phone
     ? `https://wa.me/${phone}?text=${encodeURIComponent(`Ola! Tenho interesse no produto ${produto.nome}.`)}`
     : null;
@@ -35,8 +37,8 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 
         <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="overflow-hidden rounded-lg border border-line bg-white shadow-soft">
-            {produto.imagem ? (
-              <img src={produto.imagem} alt={produto.nome} className="aspect-[4/3] h-full w-full object-cover" />
+            {imageUrl ? (
+              <img src={imageUrl} alt={produto.nome} className="aspect-[4/3] h-full w-full object-cover" />
             ) : (
               <div className="grid aspect-[4/3] place-items-center bg-slate-100 text-sm font-semibold text-graphite">Sem imagem</div>
             )}

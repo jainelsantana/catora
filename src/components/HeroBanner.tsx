@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Banner } from "@/types/catalogo";
+import { getImageUrl } from "@/utils/image-url";
 
 type HeroBannerProps = {
   banner: Banner | null;
 };
 
 export function HeroBanner({ banner }: HeroBannerProps) {
-  const image = banner?.imagem ?? "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85";
+  const image = getImageUrl(banner?.imagem) || "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85";
   const href = banner?.linkBotao ?? "#produtos";
 
   return (

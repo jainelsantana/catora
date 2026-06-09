@@ -10,7 +10,7 @@ CatalogoOra e uma plataforma web de catalogo de produtos feita com Next.js, Reac
 - Prisma ORM
 - SQLite
 - Autenticacao admin com cookie HTTP-only e JWT
-- Upload local em `public/uploads`
+- Upload local persistente em `/data/uploads` no Docker
 - Docker e Docker Compose
 
 ## Rodando com Docker
@@ -29,7 +29,7 @@ Credenciais iniciais:
 - Email: `admin@catalogoora.com`
 - Senha: `CatalogoOra@2026`
 
-O Compose cria volumes para persistir o banco em `/data/catalogoora.db` e os uploads em `/app/public/uploads`.
+O Compose cria um volume persistente em `/data`, onde ficam o banco `catalogoora.db` e as imagens em `/data/uploads`.
 
 ## Rodando localmente
 
@@ -66,6 +66,7 @@ Principais variaveis:
 
 - `DATABASE_URL`: caminho do banco SQLite
 - `PORT`: porta da aplicacao, padrao do projeto `3007`
+- `UPLOAD_DIR`: diretorio onde as imagens enviadas serao salvas
 - `JWT_SECRET`: segredo usado para assinar a sessao admin
 - `AUTH_SECURE_COOKIES`: use `true` quando publicar atras de HTTPS
 - `ADMIN_NAME`: nome do admin inicial
@@ -93,3 +94,21 @@ Principais variaveis:
 - Troque a senha inicial do admin no `.env` ou no `docker-compose.yml`.
 - O upload aceita apenas JPG, PNG e WebP ate 5MB.
 - Rotas administrativas da API validam a sessao antes de modificar dados.
+
+## Coolify e uploads
+
+Para que as fotos dos produtos aparecam apos deploy/redeploy, configure storage persistente em:
+
+```text
+/data
+```
+
+E use:
+
+```env
+DATABASE_URL=file:/data/catalogoora.db
+UPLOAD_DIR=/data/uploads
+PORT=3007
+```
+
+As imagens sao servidas pela rota `/api/uploads/[arquivo]`, entao nao dependem de arquivos dinamicos dentro da pasta `public`.
