@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@catalogoora.com");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -85,7 +85,7 @@ export default function LoginPage() {
                     type="password"
                     value={senha}
                     onChange={(event) => setSenha(event.target.value)}
-                    placeholder="CatalogoOra@2026"
+                    placeholder="Digite sua senha"
                     required
                   />
                 </span>
