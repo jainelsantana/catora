@@ -100,15 +100,15 @@ export function BannerManager() {
   const previewImage = imagePreview || getImageUrl(banner?.imagem) || "";
 
   if (loading) {
-    return <div className="panel px-5 py-4 text-sm font-semibold text-graphite">Carregando banner</div>;
+    return <div className="panel px-5 py-4 text-sm font-semibold text-graphite dark:text-slate-200">Carregando banner</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
         <p className="text-sm font-black uppercase text-lagoon">Banner principal</p>
-        <h1 className="mt-2 text-3xl font-black text-ink">Editar chamada da vitrine</h1>
-        <p className="mt-2 text-sm text-slate-600">Atualize imagem, titulo, subtitulo e destino do botao exibido na pagina inicial.</p>
+        <h1 className="mt-2 text-3xl font-black text-ink dark:text-white">Editar chamada da vitrine</h1>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Atualize imagem, titulo, subtitulo e destino do botao exibido na pagina inicial.</p>
       </div>
 
       <section className="grid gap-6 xl:grid-cols-[0.82fr_1.18fr]">
@@ -138,7 +138,7 @@ export function BannerManager() {
 
             <label className="space-y-2">
               <span className="form-label">Imagem do banner</span>
-              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-line bg-slate-50 px-4 py-5 text-sm font-bold text-graphite transition hover:border-lagoon hover:text-lagoon">
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-line bg-slate-50 px-4 py-5 text-sm font-bold text-graphite transition hover:border-lagoon hover:text-lagoon dark:border-slate-700 dark:bg-slate-950/70 dark:text-slate-200 dark:hover:text-emerald-300">
                 <ImagePlus size={18} />
                 Selecionar JPG, PNG ou WebP
                 <input className="sr-only" type="file" accept="image/png,image/jpeg,image/webp" onChange={onImageChange} />
@@ -158,7 +158,7 @@ export function BannerManager() {
 
         <div className="space-y-3">
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-xl font-black text-ink">Pre-visualizacao</h2>
+            <h2 className="text-xl font-black text-ink dark:text-white">Pre-visualizacao</h2>
             <a href={form.linkBotao || "#"} target={form.linkBotao.startsWith("http") ? "_blank" : undefined} className="btn-secondary px-3 py-2">
               <ExternalLink size={16} />
               Testar link

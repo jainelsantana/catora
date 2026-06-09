@@ -37,7 +37,7 @@ export function DashboardClient() {
   }
 
   if (!data) {
-    return <div className="panel px-5 py-4 text-sm font-semibold text-graphite">Carregando dashboard</div>;
+    return <div className="panel px-5 py-4 text-sm font-semibold text-graphite dark:text-slate-200">Carregando dashboard</div>;
   }
 
   const stats = [
@@ -52,8 +52,8 @@ export function DashboardClient() {
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <p className="text-sm font-black uppercase text-lagoon">Visao geral</p>
-          <h1 className="mt-2 text-3xl font-black text-ink">Dashboard</h1>
-          <p className="mt-2 text-sm text-slate-600">Acompanhe o catalogo e acesse as principais acoes administrativas.</p>
+          <h1 className="mt-2 text-3xl font-black text-ink dark:text-white">Dashboard</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Acompanhe o catalogo e acesse as principais acoes administrativas.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href="/admin/produtos" className="btn-primary">
@@ -73,32 +73,32 @@ export function DashboardClient() {
           return (
             <div key={item.label} className="panel p-5">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-bold text-slate-500">{item.label}</p>
+                <p className="text-sm font-bold text-slate-500 dark:text-slate-400">{item.label}</p>
                 <Icon className={item.color} size={22} />
               </div>
-              <p className="mt-4 text-4xl font-black text-ink">{item.value}</p>
+              <p className="mt-4 text-4xl font-black text-ink dark:text-white">{item.value}</p>
             </div>
           );
         })}
       </section>
 
       <section className="panel overflow-hidden">
-        <div className="flex items-center justify-between border-b border-line px-5 py-4">
+        <div className="flex items-center justify-between border-b border-line px-5 py-4 dark:border-slate-800">
           <div>
-            <h2 className="text-lg font-black text-ink">Produtos recentes</h2>
-            <p className="text-sm text-slate-500">Ultimos itens cadastrados no catalogo.</p>
+            <h2 className="text-lg font-black text-ink dark:text-white">Produtos recentes</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Ultimos itens cadastrados no catalogo.</p>
           </div>
-          <Link href="/admin/produtos" className="hidden items-center gap-1 text-sm font-black text-lagoon hover:text-ink sm:flex">
+          <Link href="/admin/produtos" className="hidden items-center gap-1 text-sm font-black text-lagoon hover:text-ink dark:hover:text-emerald-300 sm:flex">
             Gerenciar <ArrowRight size={16} />
           </Link>
         </div>
-        <div className="divide-y divide-line">
+        <div className="divide-y divide-line dark:divide-slate-800">
           {data.recentes.length > 0 ? (
             data.recentes.map((produto) => (
               <div key={produto.id} className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
                 <div>
-                  <p className="font-bold text-ink">{produto.nome}</p>
-                  <p className="mt-1 flex items-center gap-2 text-xs text-slate-500">
+                  <p className="font-bold text-ink dark:text-white">{produto.nome}</p>
+                  <p className="mt-1 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                     <Clock size={14} />
                     {produto.categoria} - {formatDate(produto.criadoEm)}
                   </p>
@@ -107,7 +107,7 @@ export function DashboardClient() {
               </div>
             ))
           ) : (
-            <div className="px-5 py-8 text-sm text-slate-500">Nenhum produto cadastrado ainda.</div>
+            <div className="px-5 py-8 text-sm text-slate-500 dark:text-slate-400">Nenhum produto cadastrado ainda.</div>
           )}
         </div>
       </section>

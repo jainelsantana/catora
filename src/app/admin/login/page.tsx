@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, LogIn, Mail } from "lucide-react";
 import { apiFetch } from "@/services/api";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,7 +33,10 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="grid min-h-screen bg-cloud lg:grid-cols-[0.95fr_1.05fr]">
+    <main className="grid min-h-screen bg-cloud dark:bg-slate-950 lg:grid-cols-[0.95fr_1.05fr]">
+      <div className="fixed right-4 top-4 z-20">
+        <ThemeToggle />
+      </div>
       <section className="hidden bg-ink p-10 text-white lg:flex lg:flex-col lg:justify-between">
         <div className="flex items-center gap-3">
           <span className="grid h-12 w-12 place-items-center rounded-lg bg-white text-sm font-black text-ink">CO</span>
@@ -54,13 +58,13 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           <div className="mb-8 lg:hidden">
             <span className="grid h-12 w-12 place-items-center rounded-lg bg-ink text-sm font-black text-white">CO</span>
-            <h1 className="mt-4 text-3xl font-black text-ink">CatalogoOra Admin</h1>
+            <h1 className="mt-4 text-3xl font-black text-ink dark:text-white">CatalogoOra Admin</h1>
           </div>
 
           <form className="panel p-6" onSubmit={handleSubmit}>
             <div>
               <p className="text-sm font-black uppercase text-lagoon">Login administrativo</p>
-              <h2 className="mt-2 text-2xl font-black text-ink">Acesse o painel</h2>
+              <h2 className="mt-2 text-2xl font-black text-ink dark:text-white">Acesse o painel</h2>
             </div>
 
             <div className="mt-6 space-y-4">

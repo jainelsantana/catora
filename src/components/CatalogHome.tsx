@@ -72,8 +72,8 @@ export function CatalogHome() {
               <SlidersHorizontal size={14} />
               Catalogo online
             </span>
-            <h2 className="text-3xl font-black text-ink">Produtos em destaque</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+            <h2 className="text-3xl font-black text-ink dark:text-white">Produtos em destaque</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
               Busque por nome, filtre por categoria e abra os detalhes para conversar sobre o item.
             </p>
           </div>
@@ -127,8 +127,8 @@ export function CatalogHome() {
         {error ? <div className="mb-6 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-700">{error}</div> : null}
 
         {loading ? (
-          <div className="grid min-h-[260px] place-items-center rounded-lg border border-dashed border-line bg-white">
-            <div className="flex items-center gap-3 text-sm font-semibold text-graphite">
+          <div className="grid min-h-[260px] place-items-center rounded-lg border border-dashed border-line bg-white dark:border-slate-800 dark:bg-slate-900/70">
+            <div className="flex items-center gap-3 text-sm font-semibold text-graphite dark:text-slate-200">
               <Loader2 className="animate-spin" size={20} />
               Carregando produtos
             </div>
@@ -140,10 +140,10 @@ export function CatalogHome() {
             ))}
           </div>
         ) : (
-          <div className="grid min-h-[260px] place-items-center rounded-lg border border-dashed border-line bg-white px-6 text-center">
+          <div className="grid min-h-[260px] place-items-center rounded-lg border border-dashed border-line bg-white px-6 text-center dark:border-slate-800 dark:bg-slate-900/70">
             <div>
-              <h3 className="text-xl font-black text-ink">Nenhum produto encontrado</h3>
-              <p className="mt-2 text-sm text-slate-600">Tente alterar a busca ou remover os filtros ativos.</p>
+              <h3 className="text-xl font-black text-ink dark:text-white">Nenhum produto encontrado</h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Tente alterar a busca ou remover os filtros ativos.</p>
             </div>
           </div>
         )}
