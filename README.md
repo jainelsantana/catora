@@ -21,8 +21,8 @@ docker compose up --build
 
 Acesse:
 
-- Site publico: `http://localhost:3000`
-- Admin: `http://localhost:3000/admin`
+- Site publico: `http://localhost:3007`
+- Admin: `http://localhost:3007/admin`
 
 Credenciais iniciais:
 
@@ -43,7 +43,7 @@ npm run db:seed
 npm run dev
 ```
 
-Depois acesse `http://localhost:3000`.
+Depois acesse `http://localhost:3007`.
 
 ## Comandos uteis
 
@@ -65,6 +65,7 @@ Veja `.env.example`.
 Principais variaveis:
 
 - `DATABASE_URL`: caminho do banco SQLite
+- `PORT`: porta da aplicacao, padrao do projeto `3007`
 - `JWT_SECRET`: segredo usado para assinar a sessao admin
 - `AUTH_SECURE_COOKIES`: use `true` quando publicar atras de HTTPS
 - `ADMIN_NAME`: nome do admin inicial

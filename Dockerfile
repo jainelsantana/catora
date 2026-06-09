@@ -10,6 +10,6 @@ RUN npm install
 COPY . .
 RUN npx prisma generate && npm run build
 
-EXPOSE 3000
+EXPOSE 3007
 
 CMD ["sh", "-c", "npx prisma migrate deploy && npm run db:seed && npm start"]

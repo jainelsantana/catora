@@ -4,8 +4,9 @@ services:
     container_name: catalogoora-app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3007:3007"
     environment:
+      PORT: "3007"
       DATABASE_URL: "file:/data/catalogoora.db"
       JWT_SECRET: "altere-este-segredo-no-compose"
       AUTH_SECURE_COOKIES: "false"
